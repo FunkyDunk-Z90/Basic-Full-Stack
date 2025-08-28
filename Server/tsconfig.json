@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "commonjs",
+        "typeRoots": ["node_modules/@types", "./src/types"],
+        "rootDir": "src",
+        "outDir": "dist",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "strictNullChecks": true,
+        "skipLibCheck": true
+    },
+    "include": ["srcc", "src/types"],
+    "ts-node": {
+        "files": true
+    }
+}
