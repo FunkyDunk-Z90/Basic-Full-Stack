@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
 
 function Navbar() {
-    const mobile = window.innerWidth < 900
+    const mobile = window.innerWidth < 768
     const [isMobile, setIsMobile] = useState(mobile)
     const [isActive, setIsActive] = useState(false)
     const [openStatus, setOpenStatus] = useState('')
@@ -10,7 +10,7 @@ function Navbar() {
 
     useEffect(() => {
         function handleResize() {
-            if (window.innerWidth >= 900) {
+            if (window.innerWidth >= 768) {
                 setIsActive(false)
                 setOpenStatus('')
                 setIsMobile(false)

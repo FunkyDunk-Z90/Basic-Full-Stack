@@ -6,7 +6,7 @@
     gap: $medium;
     position: absolute;
     top: 100%;
-    left: 0;
+    left: -100px;
     padding: $large;
     border-right: $border-dark;
     border-bottom: $border-dark;
@@ -23,19 +23,19 @@
 
 @keyframes slide-in {
     0% {
-        transform: translateX(-100%);
+        transform: translateX(0%);
     }
     100% {
-        transform: translateX(0%);
+        transform: translateX(100%);
     }
 }
 
 @keyframes slide-out {
     0% {
-        transform: translateX(0%);
+        transform: translateX(100%);
     }
     100% {
-        transform: translateX(-100%);
+        transform: translateX(0%);
     }
 }
 
@@ -54,6 +54,10 @@
     cursor: pointer;
     top: 20px;
     left: 10px;
+
+    @media (min-width: $tablet) {
+        display: none;
+    }
 
     .line {
         width: 100%;
