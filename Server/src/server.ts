@@ -1,6 +1,6 @@
 import 'dotenv/config'
 import { connect } from 'mongoose'
-import env from './utils/validateEnv'
+import { env } from './utils/validateEnv'
 import app from './app'
 
 const database = env.DATABASE.replace('<PASSWORD>', env.DATABASE_PASSWORD)

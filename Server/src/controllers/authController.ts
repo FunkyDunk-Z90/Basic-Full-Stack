@@ -1,5 +1,5 @@
 import { Request, RequestHandler } from 'express'
-import env from '../utils/validateEnv'
+import { env } from '../utils/validateEnv'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import { createHash } from 'crypto'

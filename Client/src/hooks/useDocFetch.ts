@@ -1,0 +1,87 @@
+import { useState } from 'react'
+import { useAuthContext } from './auth/useAuthContext'
+import axios from 'axios'
+import type { AxiosError, AxiosResponse } from 'axios'
+
+export const useDocFetch = () => {
+    const { dispatchUserState, setIsLoading } = useAuthContext()
+    const [error, setError] = useState(null)
+
+    const docFetch = async (data: tReqProps) => {
+        const { dataToSend, url, credentials, requestType } = data
+        setIsLoading(true)
+
+        setError(null)
+        try {
+            let response: AxiosResponse
+
+            switch (requestType) {
+                case 'GET':
+                    response = await axios.get(`/api/v2/${url}`, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        withCredentials: credentials,
+                    })
+                    break
+                case 'POST':
+                    response = await axios.post(`/api/v2/${url}`, dataToSend, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        withCredentials: credentials,
+                    })
+                    break
+                case 'PATCH':
+                    response = await axios.patch(`/api/v2/${url}`, dataToSend, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        withCredentials: credentials,
+                    })
+                    break
+                case 'DELETE':
+                    response = await axios.delete(`/api/v2/${url}`, {
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        withCredentials: credentials,
+                    })
+                    break
+                default:
+                    throw new Error('Invalid Request Type')
+            }
+
+            //---------- GET ----------
+            if (response.status === 200) {
+                const { data } = response
+                console.log(data)
+
+                setIsLoading(false)
+            } else {
+                setIsLoading(false)
+            }
+        } catch (error) {
+            if (
+                axios.isAxiosError<AxiosError, Record<string, unknown>>(error)
+            ) {
+                if (error.response?.status === 500) {
+                    dispatchUserState({ type: 'CLEAR_STATE' })
+                    localStorage.clear()
+                    console.log("Can't connect to Server")
+                    setIsLoading(false)
+                } else {
+                    dispatchUserState({ type: 'CLEAR_STATE' })
+                    localStorage.clear()
+                    console.log('User not loggedd in')
+                    setIsLoading(false)
+                }
+            } else {
+                console.error(error)
+                setIsLoading(false)
+            }
+        }
+    }
+
+    return { docFetch, error }
+}

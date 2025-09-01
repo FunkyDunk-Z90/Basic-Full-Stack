@@ -1,8 +1,8 @@
-import { cleanEnv } from 'envalid'
-import { port, str } from 'envalid/dist/validators'
+// src/env.ts
+import { cleanEnv, str, port } from 'envalid'
 
-export default cleanEnv(process.env, {
-    PORT: port() || 8000,
+export const env = cleanEnv(process.env, {
+    PORT: port({ default: 8000 }),
     DATABASE: str(),
     DATABASE_PASSWORD: str(),
     JWT_SECRET: str(),
@@ -14,4 +14,8 @@ export default cleanEnv(process.env, {
     CLOUDINARY_SECRET: str(),
     CLOUDINARY_URL: str(),
     USER_DEFAULT_AVATAR: str(),
+    MAILTRAP_HOST: str(),
+    MAILTRAP_PORT: str(),
+    MAILTRAP_USERNAME: str(),
+    MAILTRAP_PASSWORD: str(),
 })

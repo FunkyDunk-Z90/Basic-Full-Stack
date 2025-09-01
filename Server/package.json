@@ -35,6 +35,8 @@
         "@types/jsonwebtoken": "^9.0.10",
         "@types/mongoose": "^5.11.96",
         "@types/morgan": "^1.9.10",
+        "@types/node": "^24.3.0",
+        "mailtrap": "^4.2.0",
         "ts-node": "^10.9.2",
         "typescript": "^5.9.2"
     }

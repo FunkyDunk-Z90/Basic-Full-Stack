@@ -1,6 +1,6 @@
 import { Request } from 'express'
 import jwt from 'jsonwebtoken'
-import env from '../utils/validateEnv'
+import { env } from '../utils/validateEnv'
 
 export const createToken = (_id: string) => {
     return jwt.sign({ _id }, env.JWT_SECRET, { expiresIn: '90d' })

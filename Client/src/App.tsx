@@ -9,7 +9,11 @@ import Footer from './components/layout/Footer'
 // Routers
 import AppRouter from './routes/AppRouter'
 
+// Context
+import { useAuthContext } from './hooks/auth/useAuthContext'
+
 function App() {
+    const { user, isLoading } = useAuthContext()
     useEffect(() => {
         const setVh = () => {
             const vh = window.innerHeight * 0.01
@@ -22,6 +26,8 @@ function App() {
 
         return () => window.removeEventListener('resize', setVh)
     })
+
+    console.log(user, isLoading)
 
     return (
         <section className="wrapper body">
