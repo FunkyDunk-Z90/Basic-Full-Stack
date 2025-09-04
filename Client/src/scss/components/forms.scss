@@ -1,19 +1,13 @@
 @use '../mixins.scss' as *;
 @use '../variables.scss' as *;
 
-.wrapper.form {
-    width: 100%;
-}
-
 .form {
     display: grid;
-    background-color: $dark;
+    background-color: $light;
     padding: $medium;
-    gap: $medium;
+    gap: $large;
     height: max-content;
     justify-items: center;
-
-    @include dark-border;
 }
 
 .results-container {
@@ -23,4 +17,11 @@
     align-items: center;
 
     @include dark-border;
+}
+
+.wrapper.login {
+    display: grid;
+    align-self: center;
+    gap: $small;
+    justify-items: center;
 }

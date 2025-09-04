@@ -1,3 +1,5 @@
+import { useAuthContext } from '../../hooks/auth/useAuthContext'
+
 import Navbar from './Navbar'
 
 interface iHeader {
@@ -8,6 +10,7 @@ interface iHeader {
 }
 
 function Header({ businessName, logo, icons, paras }: iHeader) {
+    const { user } = useAuthContext()
     return (
         <section className="wrapper header">
             {logo && (
@@ -19,7 +22,7 @@ function Header({ businessName, logo, icons, paras }: iHeader) {
                 />
             )}
             <h1 className="businessName">{businessName}</h1>
-            <Navbar />
+            {user ? <Navbar /> : null}
             {icons && (
                 <div className="wrapper icons">
                     {icons.map((el) => {

@@ -6,8 +6,8 @@ import Contact from '../components/pages/Contact'
 function AppRouter() {
     return (
         <Routes>
-            <Route path="/" Component={Home} />
-            <Route path="/contact" Component={Contact} />
+            <Route index path="/" element={<Home />} />
+            <Route path="/contact" element={<Contact />} />
         </Routes>
     )
 }

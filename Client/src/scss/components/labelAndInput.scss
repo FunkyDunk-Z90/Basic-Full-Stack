@@ -1,12 +1,12 @@
 @use '../mixins.scss' as *;
 @use '../variables.scss' as *;
 
-.label-input-container {
+.wrapper.label-input {
     display: grid;
     gap: $small;
 }
 
-.form-input {
+.input-content {
     background-color: $light;
     max-width: 100%;
     min-height: 40px;

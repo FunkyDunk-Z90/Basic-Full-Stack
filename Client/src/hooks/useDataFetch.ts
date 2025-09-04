@@ -3,11 +3,11 @@ import { useAuthContext } from './auth/useAuthContext'
 import axios from 'axios'
 import type { AxiosError, AxiosResponse } from 'axios'
 
-export const useDocFetch = () => {
+export const useDataFetch = () => {
     const { dispatchUserState, setIsLoading } = useAuthContext()
     const [error, setError] = useState(null)
 
-    const docFetch = async (data: tReqProps) => {
+    const dataFetch = async (data: tReqProps) => {
         const { dataToSend, url, credentials, requestType } = data
         setIsLoading(true)
 
@@ -17,7 +17,7 @@ export const useDocFetch = () => {
 
             switch (requestType) {
                 case 'GET':
-                    response = await axios.get(`/api/v2/${url}`, {
+                    response = await axios.get(`/api/v1/${url}`, {
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -25,7 +25,7 @@ export const useDocFetch = () => {
                     })
                     break
                 case 'POST':
-                    response = await axios.post(`/api/v2/${url}`, dataToSend, {
+                    response = await axios.post(`/api/v1/${url}`, dataToSend, {
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -33,7 +33,7 @@ export const useDocFetch = () => {
                     })
                     break
                 case 'PATCH':
-                    response = await axios.patch(`/api/v2/${url}`, dataToSend, {
+                    response = await axios.patch(`/api/v1/${url}`, dataToSend, {
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -41,7 +41,7 @@ export const useDocFetch = () => {
                     })
                     break
                 case 'DELETE':
-                    response = await axios.delete(`/api/v2/${url}`, {
+                    response = await axios.delete(`/api/v1/${url}`, {
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -52,10 +52,17 @@ export const useDocFetch = () => {
                     throw new Error('Invalid Request Type')
             }
 
+            console.log(response)
+
             //---------- GET ----------
             if (response.status === 200) {
                 const { data } = response
-                console.log(data)
+                const { user } = data
+
+                dispatchUserState({
+                    type: 'SET_STATE',
+                    payload: user,
+                })
 
                 setIsLoading(false)
             } else {
@@ -80,8 +87,12 @@ export const useDocFetch = () => {
                 console.error(error)
                 setIsLoading(false)
             }
+
+            dispatchUserState({
+                type: 'CLEAR_STATE',
+            })
         }
     }
 
-    return { docFetch, error }
+    return { dataFetch, error }
 }

@@ -12,6 +12,8 @@
 // Components
 @use './components/button.scss';
 @use './components/spinner.scss';
+@use './components/forms.scss';
+@use './components/labelAndInput.scss';
 
 // Utils
 @use './utils/gallery.scss';
@@ -46,9 +48,13 @@ a {
     text-decoration: none;
     font-size: 1.2rem;
     color: $dark;
+    width: max-content;
+    padding: $small;
 
     &:hover {
         color: $primary;
+        opacity: 0.8;
+        transform: translateY(0.1rem);
     }
 }
 
@@ -75,6 +81,7 @@ input::-webkit-inner-spin-button {
 }
 
 .wrapper.content {
+    display: grid;
     margin-inline: auto;
     padding-block: $xlarge;
     max-width: calc(100% - $xlarge);

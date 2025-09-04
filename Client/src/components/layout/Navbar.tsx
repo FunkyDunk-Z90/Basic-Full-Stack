@@ -1,5 +1,11 @@
-import { Link } from 'react-router-dom'
 import { useEffect, useRef, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
+// Hooks
+import { useDataFetch } from '../../hooks/useDataFetch'
+
+// Utils
+import MyButton from '../utils/MyButton'
 
 function Navbar() {
     const mobile = window.innerWidth < 768
@@ -7,6 +13,8 @@ function Navbar() {
     const [isActive, setIsActive] = useState(false)
     const [openStatus, setOpenStatus] = useState('')
     const navbarRef = useRef<HTMLDivElement>(null)
+    const { dataFetch } = useDataFetch()
+    const navigate = useNavigate()
 
     useEffect(() => {
         function handleResize() {
@@ -56,6 +64,15 @@ function Navbar() {
         }
     }
 
+    const handleLogout = () => {
+        dataFetch({
+            requestType: 'POST',
+            url: 'users/logout',
+        })
+
+        navigate('/login', { replace: true })
+    }
+
     return (
         <>
             <div
@@ -74,6 +91,9 @@ function Navbar() {
                 <Link to={'/contact'} onClick={toggleNav}>
                     Contact
                 </Link>
+                <MyButton btnType="button" handleClick={handleLogout}>
+                    Logout
+                </MyButton>
             </div>
         </>
     )

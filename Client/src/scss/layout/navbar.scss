@@ -6,11 +6,24 @@
     gap: $medium;
     position: absolute;
     top: 100%;
-    left: -100px;
+    width: 120px;
+    left: -120px;
     padding: $large;
     border-right: $border-dark;
     border-bottom: $border-dark;
-    transform: translateX(-100%); // start hidden
+
+    @media (min-width: $tablet) {
+        position: relative;
+        top: 0;
+        left: 0;
+        border: none;
+        grid-template-columns: $gallery;
+        width: 100%;
+        max-width: $desktop;
+        align-items: center;
+        justify-items: center;
+        padding: 0;
+    }
 }
 
 .wrapper.navbar.opened {

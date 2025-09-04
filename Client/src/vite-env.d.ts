@@ -33,6 +33,12 @@ interface iLoginData {
     password: string
 }
 
+interface iPasswordReset {
+    currentPassword?: string
+    newPassword: string
+    passwordConfirm: string
+}
+
 interface iUpdateData {
     firstName?: string
     lastName?: string
@@ -66,7 +72,7 @@ type tRequest = 'GET' | 'POST' | 'PATCH' | 'DELETE'
 type tReqProps = {
     dataToSend?: tData
     url: string
-    credentials: boolean
+    credentials?: boolean
     authType?: tAuthType
     requestType: tRequest
 }
@@ -117,6 +123,6 @@ interface iInput {
 }
 
 interface iLabelAndInput {
-    labelObj?: I_Label
-    inputObj: I_Input
+    labelObj?: iLabel
+    inputObj: iInput
 }
