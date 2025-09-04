@@ -1,22 +1,28 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
+import { useDataFetch } from '../../hooks/useDataFetch'
+
 import Form from '../utils/Form'
 
-const formDataInit: iPasswordReset = {
-    newPassword: '',
-    passwordConfirm: '',
+const formDataInit = {
+    email: '',
 }
 
-function Login() {
-    const [formData, setFormData] = useState<iPasswordReset>(formDataInit)
+function ForgotPassword() {
+    const [formData, setFormData] = useState(formDataInit)
+    const { dataFetch } = useDataFetch()
 
     const handleForgotPassword = (e: tFormEvent) => {
         e.preventDefault()
 
-        console.log(e)
+        dataFetch({
+            requestType: 'POST',
+            credentials: true,
+            url: 'users/forgot-password',
+            dataToSend: formData,
+        })
 
-        console.log('loggin in')
         setFormData(formDataInit)
     }
 
@@ -29,38 +35,20 @@ function Login() {
         }))
     }
 
-    console.log(formData)
-
     return (
         <div className="wrapper login">
+            <p>We will send a link to your email to reset you password.</p>
             <Form
-                buttonText="Reset Password"
-                handleSubmit={() => handleForgotPassword}
+                buttonText="Forgot Password"
+                handleSubmit={handleForgotPassword}
                 formComponents={[
                     {
                         inputObj: {
-                            id: 'newPassword',
-                            name: 'newPassword',
-                            type: 'password',
+                            id: 'email',
+                            name: 'email',
+                            type: 'text',
                             handleChange,
-                            placeholder: '**********',
-                        },
-                        labelObj: {
-                            label: 'New Password',
-                            htmlFor: 'newPassword',
-                        },
-                    },
-                    {
-                        inputObj: {
-                            id: 'passwordConfirm',
-                            name: 'passwordConfirm',
-                            type: 'password',
-                            handleChange,
-                            placeholder: '***********',
-                        },
-                        labelObj: {
-                            label: 'Confirm Password',
-                            htmlFor: 'passwordConfirm',
+                            placeholder: 'your-email@mail.com',
                         },
                     },
                 ]}
@@ -70,4 +58,4 @@ function Login() {
     )
 }
 
-export default Login
+export default ForgotPassword

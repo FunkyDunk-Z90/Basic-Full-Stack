@@ -55,7 +55,7 @@ interface iSignUpData extends iLoginData {
     passwordConfirm: string
 }
 
-type tData = iLoginData | iSignUpData | iUpdateData
+type tData = iLoginData | iSignUpData | iUpdateData | iPasswordReset | string
 
 //---------- Crud Ops ----------
 
